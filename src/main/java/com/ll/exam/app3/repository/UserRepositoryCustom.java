@@ -9,4 +9,6 @@ public interface UserRepositoryCustom {
     SiteUser customFindById(Long id);
 
     List<SiteUser> customFindAll();
+
+    SiteUser customfildByname(String name);
 }

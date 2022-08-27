@@ -22,6 +22,11 @@ public class QueryDslTest {
     @Autowired
     JPAQueryFactory jpaQueryFactory;
     QSiteUser quser=QSiteUser.siteUser;
+
+    @Test
+    void 유저생성(){
+
+    }
     @Test
     void QueryDsl을_사용하여_사용자조회(){
         SiteUser user=jpaQueryFactory.selectFrom(quser)
