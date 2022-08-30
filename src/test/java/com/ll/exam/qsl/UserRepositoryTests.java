@@ -10,8 +10,10 @@ import org.springframework.test.context.ActiveProfiles;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @ActiveProfiles("test") // 테스트 모드 활성화
@@ -60,4 +62,31 @@ class UserRepositoryTests {
         assertThat(u2.getEmail()).isEqualTo("user2@test.com");
         assertThat(u2.getPassword()).isEqualTo("{noop}1234");
     }
+
+    @Test
+    @DisplayName("모든 회원의 수")
+    void t4() {
+        Long count = userRepository.getQslCount();
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    @DisplayName("가장 오래된 회원 1명")
+    void t5() {
+        SiteUser u1 = userRepository.getQslUserOrderByIdAscOne();
+
+        assertThat(u1.getId()).isEqualTo(1L);
+        assertThat(u1.getUsername()).isEqualTo("user1");
+        assertThat(u1.getEmail()).isEqualTo("user1@test.com");
+        assertThat(u1.getPassword()).isEqualTo("{noop}1234");
+    }
+    @Test
+    @DisplayName("유저 검색 하기 ")
+    void t6() {
+        List<SiteUser> u1 = userRepository.searchQsl("user1");
+        for(SiteUser s : u1){
+            assertTrue(s.getUsername().contains("user1") || s.getEmail().contains("user1"));
+        }
+    }
+
 }
