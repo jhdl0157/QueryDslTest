@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class BookController {
     private final String TTB_KEY = "ttbjhdl01572144001";
-    private final String SEARCH_URL = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?&QueryType=Keyword&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101";
+    private final String SEARCH_URL = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?&QueryType=Keyword&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101&Cover=Big";
     private final String INFO_URL = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?itemIdType=ISBN13&output=js&Version=20131101&OptResult=Toc";
 
     @GetMapping("book/{keyword}")
