@@ -26,12 +26,24 @@ public class SiteUser {
     @Column(unique = true)
     private String email;
 
+
+
     @Builder.Default
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<InterestKeyword> interestKeywords = new HashSet<>();
+    private Set<SiteUser> followers = new HashSet<>();
 
-    public void addInterestKeywordContent(String keywordContent) {
-        InterestKeyword interestKeyword=new InterestKeyword(keywordContent);
-        interestKeywords.add(interestKeyword);
+    @Builder.Default
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<SiteUser> followings=new HashSet<>();
+
+
+
+    public void follow(SiteUser following) {
+        if (this == following) return;
+        if (following == null) return;
+        if (this.getId() == following.getId()) return;
+
+        following.getFollowers().add(this);
+        this.followings.add(following);
     }
 }
