@@ -76,6 +76,17 @@ public class TestInitData {
             u2.addInterestKeywordContent("농구");
 
             userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6, u7, u8));
+            u8.follow(u1);
+            u7.follow(u1);
+            u6.follow(u1);
+            u5.follow(u1);
+            u4.follow(u1);
+
+            u7.follow(u6);
+            u7.follow(u5);
+            u7.follow(u4);
+            u7.follow(u3);
+            userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6, u7, u8));
         };
     }
 }

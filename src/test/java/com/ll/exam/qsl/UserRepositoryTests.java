@@ -1,5 +1,6 @@
 package com.ll.exam.qsl;
 
+import com.ll.exam.qsl.interestKeyword.entity.InterestKeyword;
 import com.ll.exam.qsl.user.entity.SiteUser;
 import com.ll.exam.qsl.user.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -265,7 +266,6 @@ class UserRepositoryTests {
 
     @Test
     @DisplayName("")
-    @Rollback(false)
     void t15() {
         SiteUser u1 = userRepository.getQslUser(1L);
         SiteUser u2 = userRepository.getQslUser(2L);
@@ -280,6 +280,25 @@ class UserRepositoryTests {
         List<SiteUser> list=u2.getFollowers().stream().toList(); // [u1]
         u2.getFollowings(); // []
         System.out.println(list.get(0).getUsername());
+
+    }
+
+    @Test
+    @DisplayName("u1은 더 이상 농구에 관심이 없습니다.")
+    void t16() {
+        SiteUser u1 = userRepository.getQslUser(1L);
+
+        u1.removeInterestKeywordContent("농구");
+    }
+
+    @Test
+    @DisplayName("내가 팔로우 하고 있는 사람이 좋아하는 키워드 전부 가져오기")
+    @Rollback(value = false)
+    void t17(){
+        SiteUser u1 = userRepository.getQslUser(1L);
+        SiteUser u2 = userRepository.getQslUser(2L);
+        u1.follow(u2);
+
 
     }
 }
