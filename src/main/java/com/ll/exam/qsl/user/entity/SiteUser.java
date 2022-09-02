@@ -36,6 +36,14 @@ public class SiteUser {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<SiteUser> followings=new HashSet<>();
 
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<InterestKeyword> interestKeywords = new HashSet<>();
+
+    public void addInterestKeywordContent(String keywordContent) {
+        interestKeywords.add(new InterestKeyword(this, keywordContent));
+    }
+
 
 
     public void follow(SiteUser following) {
