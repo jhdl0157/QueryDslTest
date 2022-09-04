@@ -1,6 +1,7 @@
 package com.ll.exam.qsl;
 
 import com.ll.exam.qsl.interestKeyword.entity.InterestKeyword;
+import com.ll.exam.qsl.interestKeyword.repository.InterestRepository;
 import com.ll.exam.qsl.user.entity.SiteUser;
 import com.ll.exam.qsl.user.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +31,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class UserRepositoryTests {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private InterestRepository interestRepository;
 
     @Test
     @DisplayName("회원 생성")
@@ -297,7 +301,9 @@ class UserRepositoryTests {
     void t17(){
         SiteUser u1 = userRepository.getQslUser(1L);
         SiteUser u2 = userRepository.getQslUser(2L);
-        u1.follow(u2);
+
+        List<InterestKeyword> interestKeywords=interestRepository.getFollowInterest(u1);
+
 
 
     }
